@@ -1,2 +1,2 @@
-# mapping-stunting-indonesia
+# mapping stunting and poverty in indonesia
 The project is based on the research: Mapping stunting and poverty in Indonesia: is it clustered or scattered across the space?.
