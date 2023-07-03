@@ -75,7 +75,7 @@ def stunting_riskesdas(kolom_tinggi=None, kolom_umur=None,
             adjusment -= 0.7
         tinggi += adjusment
         
-        if tinggi > (-3*sd_acuan + mean_acuan) or tinggi < (-2*sd_acuan + mean_acuan):
+        if tinggi > (-3*sd_acuan + mean_acuan) and tinggi < (-2*sd_acuan + mean_acuan):
             stunting = 'Stunted'
         elif tinggi < (-3*sd_acuan + mean_acuan):
             stunting = 'Severely Stunted'
