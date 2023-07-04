@@ -36,7 +36,8 @@ stunting_girls_2_5 = pd.read_excel('stunting girls zscore 2_5.xlsx')
 # Di data, range umur hanya 0-59 bulan
 
 def stunting_riskesdas(kolom_tinggi=None, kolom_umur=None,
-                       kolom_kelamin=None, posisi_pengukuran=None, 
+                       kolom_kelamin=None, posisi_pengukuran=None,
+                       kolom_provinsi=None, kolom_kabkota=None,
                        data_input=None):
     
     # data_input = riskesdas2013
@@ -86,8 +87,8 @@ def stunting_riskesdas(kolom_tinggi=None, kolom_umur=None,
         list_stunting.append(stunting)
     
     series_stunting = pd.Series(list_stunting)
-    id_prov = df_input['B1R1']
-    id_kab = df_input['B1R2']
+    id_prov = df_input[kolom_provinsi]
+    id_kab = df_input[kolom_kabkota]
     weight = df_input['FWT']
     
     result_stunting = pd.DataFrame({'ID Provinsi': id_prov,
@@ -105,13 +106,26 @@ result2013 = stunting_riskesdas(kolom_tinggi='K02B',
                                 kolom_umur='B4K7BLN',
                                 kolom_kelamin='B4K4',
                                 posisi_pengukuran='K02C',
+                                kolom_provinsi='B1R1',
+                                kolom_kabkota='B1R2',
                                 data_input=riskesdas2013)
 
 result2018 = stunting_riskesdas(kolom_tinggi='B10L01B',
                                 kolom_umur='B4K10BLN',
                                 kolom_kelamin='B4K7',
                                 posisi_pengukuran='B10L01C',
+                                kolom_provinsi='B1R1',
+                                kolom_kabkota='B1R2',
                                 data_input=riskesdas2018)
 
-result2013.to_excel('example output/The result of Stunting 2013 by kabkota.xlsx')
-result2018.to_excel('example output/The result of Stunting 2018 by kabkota.xlsx')
+result2021 = stunting_riskesdas(kolom_tinggi='P1302C',
+                                kolom_umur='P4082ANAK',
+                                kolom_kelamin='P404ANAK',
+                                posisi_pengukuran='P1302D',
+                                kolom_provinsi='p101',
+                                kolom_kabkota='p102',
+                                data_input=ssgi2021)
+
+result2013.to_excel('Data Output/The result of Stunting 2013 by kabkota.xlsx')
+result2018.to_excel('Data Output/The result of Stunting 2018 by kabkota.xlsx')
+result2021.to_excel('Data Output/The result of Stunting 2021 by kabkota.xlsx')
