@@ -97,5 +97,21 @@ def stunting_riskesdas(kolom_tinggi=None, kolom_umur=None,
     
     slice_stunting = result_stunting[result_stunting['Kondisi Stunting']!='Normal']
     df_grouped = slice_stunting.groupby('ID Kabupaten').agg({'Weight':'sum'})
+    df_grouped = df_grouped.rename(columns={'Weight':'Jumlah Balita Stunting'})
     
     return df_grouped
+
+result2013 = stunting_riskesdas(kolom_tinggi='K02B',
+                                kolom_umur='B4K7BLN',
+                                kolom_kelamin='B4K4',
+                                posisi_pengukuran='K02C',
+                                data_input=riskesdas2013)
+
+result2018 = stunting_riskesdas(kolom_tinggi='B10L01B',
+                                kolom_umur='B4K10BLN',
+                                kolom_kelamin='B4K7',
+                                posisi_pengukuran='B10L01C',
+                                data_input=riskesdas2018)
+
+result2013.to_excel('example output/The result of Stunting 2013 by kabkota.xlsx')
+result2018.to_excel('example output/The result of Stunting 2018 by kabkota.xlsx')
